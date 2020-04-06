@@ -1,4 +1,4 @@
-const books = [
+const companies = [
   {
     title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
@@ -9,4 +9,4 @@ const books = [
   },
 ];
 
-export default books;
+export default companies;

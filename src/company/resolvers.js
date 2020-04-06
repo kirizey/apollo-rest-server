@@ -1,8 +1,8 @@
-import Book from './Book';
+import Company from './Company';
 
 const resolvers = {
   Query: {
-    books: () => Book.all(),
+    companies: () => Company.all(),
   },
 };
 
