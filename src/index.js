@@ -16,7 +16,7 @@ const server = new ApolloServer({
   },
 });
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({  }).then(() => {
   console.log('🚀🚀🚀 DB synced');
 
   server.listen({ port: 4000, path: '/gql' }).then(({ url }) => {

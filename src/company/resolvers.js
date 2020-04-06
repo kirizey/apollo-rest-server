@@ -1,10 +1,6 @@
 export default {
   Query: {
-    allCompanies: (_, __, { models }) => models.Company.findAll().then(res => {
-      console.log(res);
-
-      return res;
-    }),
+    allCompanies: (_, __, { models }) => models.Company.findAll(),
   },
 
   Mutation: {
