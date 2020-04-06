@@ -1,9 +1,13 @@
-import Company from './Company';
-
-const resolvers = {
+export default {
   Query: {
-    companies: () => Company.all(),
+    allCompanies: (_, __, { models }) => models.Company.findAll().then(res => {
+      console.log(res);
+
+      return res;
+    }),
+  },
+
+  Mutation: {
+    createCompany: (_, { name }, { models }) => models.Company.create({ name }),
   },
 };
-
-export default resolvers;

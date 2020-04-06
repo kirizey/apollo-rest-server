@@ -1,13 +1,16 @@
 import { gql } from 'apollo-server';
 
-const typeDefs = gql`
+export default gql`
+ extend type Query {
+    allCompanies: [Company]
+  }
+
+  type Mutation {
+    createCompany(name: String): Company
+  }
+
   type Company {
     name: String
-    owner: String
-  }
-  extend type Query {
-    companies: [Company]
+    owner: Owner
   }
 `;
-
-export default typeDefs;

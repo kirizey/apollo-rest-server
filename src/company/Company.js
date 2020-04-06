@@ -1,9 +1,17 @@
-import companies from './data';
+export default (sequelize, DataTypes) => {
+  const Company = sequelize.define('company', {
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
+  });
 
-class Company {
-  static all() {
-    return companies;
-  }
-}
+  Company.associate = (models) => {
+    // 1:M
+    Company.belongsTo(models.Owner, {
+      foreignKey: 'ownerId',
+    });
+  };
 
-export default Company;
+  return Company;
+};
