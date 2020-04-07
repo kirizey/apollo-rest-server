@@ -1,8 +1,14 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server-express';
+import cors from 'cors';
+import express from 'express';
 
 import models, { sequelize } from './models';
 import company from './company';
 import owner from './owner';
+
+const app = express();
+
+app.use(cors());
 
 const typeDefs = gql`
   type Query
@@ -14,12 +20,15 @@ const server = new ApolloServer({
   context: {
     models,
   },
+  tracing: true,
 });
 
-sequelize.sync({  }).then(() => {
-  console.log('🚀🚀🚀 DB synced');
+server.applyMiddleware({ app, path: '/gql' });
 
-  server.listen({ port: 4000, path: '/gql' }).then(({ url }) => {
-    console.log(`🚀🚀🚀 Server ready at ${url}`);
+app.listen({ port: 8000 }, () => {
+  console.log('Apollo Server on http://localhost:8000/gql');
+
+  sequelize.sync({ }).then(() => {
+    console.log('🚀🚀🚀 DB synced');
   });
 });

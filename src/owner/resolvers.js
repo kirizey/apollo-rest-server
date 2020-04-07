@@ -1,8 +1,16 @@
-import Owner from './Owner';
 
 const resolvers = {
   Query: {
-    owners: () => Owner.all(),
+    owners: (_, __, { models }) => models.Owner.findAll(),
+    owner: (_, { id }, { models }) => models.Owner.findOne({ where: { id } }),
+  },
+
+  Mutation: {
+    createOwner: (_, { name }, { models }) => models.Owner.create({ name }),
+  },
+
+  Owner: {
+    companies: (parent, args, { models }) => models.Company.findAll({ where: { ownerId: parent.id } }),
   },
 };
 
