@@ -3,7 +3,7 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
   extend type Query {
     owners: [Owner]
-    owner: Owner
+    owner(id: Int!): Owner
   }
 
   extend type Mutation {

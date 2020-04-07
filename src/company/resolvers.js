@@ -24,6 +24,6 @@ export default {
   },
 
   Company: {
-    owner: (parent, args, { models }) => models.Owner.findOne({ where: { id: parent.ownerId } }),
+    owner: (parent, __, { models }) => models.Owner.findOne({ where: { id: parent.ownerId } }),
   },
 };

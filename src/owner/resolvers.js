@@ -10,7 +10,7 @@ const resolvers = {
   },
 
   Owner: {
-    companies: (parent, args, { models }) => models.Company.findAll({ where: { ownerId: parent.id } }),
+    companies: (parent, __, { models }) => models.Company.findAll({ where: { ownerId: parent.id } }),
   },
 };
 
