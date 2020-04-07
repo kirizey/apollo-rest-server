@@ -25,8 +25,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/gql' });
 
-app.listen({ port: 8000 }, () => {
-  console.log('Apollo Server on http://localhost:8000/gql');
+const PORT = process.env.PORT || 8000;
+
+app.listen({ port: PORT }, () => {
+  console.log(`Apollo Server on http://localhost:${PORT}/gql`);
 
   sequelize.sync({ }).then(() => {
     console.log('🚀🚀🚀 DB synced');
