@@ -7,16 +7,21 @@ export default {
   },
 
   Mutation: {
-    createCompany: (_, { name, ownerId }, { models }) => models.Company.create({ name, ownerId }),
-    updateCompany: async (_, { id, ...rest }, { models }) => {
+    createCompany: (_, fields, { models }) => models.Company.create(fields.input),
+    updateCompany: async (_, fields, { models }) => {
+      const { id, ...data } = fields.input;
       if (!id) throw new UserInputError('You should provide company id');
 
       try {
-        const company = await models.Company.update(rest, {
+        const result = await models.Company.update(data, {
           where: { id },
+          returning: true,
+          plain: true,
         });
 
-        return company;
+        if (result) {
+          return result[1].dataValues;
+        }
       } catch (error) {
         throw new UserInputError(error.message);
       }
