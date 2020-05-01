@@ -3,8 +3,8 @@ import cors from 'cors';
 import express from 'express';
 
 import models, { sequelize } from './models';
-import company from './company';
-import owner from './owner';
+import company from './gql/company';
+import owner from './gql/owner';
 
 const app = express();
 

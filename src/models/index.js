@@ -17,8 +17,8 @@ export const sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
 });
 
 const models = {
-  Company: sequelize.import('./company/Company'),
-  Owner: sequelize.import('./owner/Owner'),
+  Company: sequelize.import('./Company'),
+  Owner: sequelize.import('./Owner'),
 };
 
 Object.keys(models).forEach((modelName) => {
