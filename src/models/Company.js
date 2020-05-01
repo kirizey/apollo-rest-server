@@ -1,98 +1,48 @@
-export default (sequelize, DataTypes) => {
-  const Company = sequelize.define('company', {
-    /**
-     * Company name.
-     */
-    name: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
-    /**
-     * Company legal name.
-     */
-    legalName: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company abbr name.
-     */
-    abbrName: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company phone.
-     */
-    phone: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company address.
-     */
-    address: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company city.
-     */
-    city: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company district.
-     */
-    district: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company zip code.
-     */
-    zipCode: {
-      type: DataTypes.INTEGER,
-    },
-    /**
-     * Company employees number.
-     */
-    employeesNumber: {
-      type: DataTypes.INTEGER,
-    },
-    /**
-     * Company description.
-     */
-    description: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company last research date.
-     */
-    lastResearchDate: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company logo.
-     */
-    logo: {
-      type: DataTypes.STRING,
-    },
-    /**
-     * Company photos list.
-     */
-    photos: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
-    /**
-     * Company web link.
-     */
-    web: {
-      type: DataTypes.STRING,
-    },
-  });
 
+module.exports = (sequelize, DataTypes) => {
+  const Company = sequelize.define('Company', {
+    name: DataTypes.STRING,
+    legalName: DataTypes.STRING,
+    abbrName: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    address: DataTypes.STRING,
+    city: DataTypes.STRING,
+    district: DataTypes.STRING,
+    zipCode: DataTypes.INTEGER,
+    employeesNumber: DataTypes.INTEGER,
+    description: DataTypes.STRING,
+    logo: DataTypes.STRING,
+    photos: DataTypes.ARRAY(DataTypes.STRING),
+    web: DataTypes.STRING,
+    foundationDate: DataTypes.DATE,
+  }, {});
   Company.associate = (models) => {
-    // 1:M
-    Company.belongsTo(models.Owner, {
-      foreignKey: 'ownerId',
+    /**
+     * Company has 1 owner.
+     */
+    Company.hasOne(models.Person, {
+      as: 'owner',
+    });
+
+    Company.hasOne(models.CompanyType, {
+      as: 'companyType',
+    });
+
+    Company.hasOne(models.Revenue, {
+      as: 'revenue',
+    });
+
+    Company.hasOne(models.Company, {
+      as: 'parent',
+    });
+
+    Company.hasOne(models.CompanyStatus, {
+      as: 'status',
+    });
+
+    Company.hasOne(models.BusinessModel, {
+      as: 'businessModel',
     });
   };
-
   return Company;
 };

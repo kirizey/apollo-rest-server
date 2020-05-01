@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "nodemon --exec babel-node src/index.js",
+    "migrate": "cd ./src && npx sequelize-cli db:migrate && cd ../",
+    "drop": "cd ./src && npx sequelize-cli db:drop && cd ../",
+    "create": "cd ./src && npx sequelize-cli db:create && cd ../"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +35,6 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
-    "prettier": "^2.0.3",
-    "sequelize-cli": "^5.5.1"
+    "prettier": "^2.0.3"
   }
 }

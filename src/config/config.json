@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "parol7737",
+    "database": "harmony-crm",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "parol7737",
+    "database": "harmony-crm",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "parol7737",
+    "database": "harmony-crm",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}

@@ -30,9 +30,7 @@ const PORT = process.env.PORT || 8000;
 app.listen({ port: PORT }, () => {
   console.log(`Apollo Server on http://localhost:${PORT}/gql`);
 
-  sequelize.sync({ 
-    // force: true
-   }).then(() => {
+  sequelize.sync({}).then(() => {
     console.log('🚀🚀🚀 DB synced');
   });
 });

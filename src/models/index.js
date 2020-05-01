@@ -1,33 +1,43 @@
-import Sequelize from 'sequelize';
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
 
-require('dotenv').config();
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+// eslint-disable-next-line import/no-dynamic-require
+const config = require(`${__dirname}/../config/config.json`)[env];
 
-const dbName = process.env.DB_NAME;
-const dbUsername = process.env.DB_USERNAME;
-const dbPassword = process.env.DB_PASSWORD;
+const db = {};
 
-// eslint-disable-next-line import/prefer-default-export
-export const sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
-  host: 'localhost',
-  dialect: 'postgres',
-  define: {
-    timestamps: true,
-    underscored: true,
-  },
-});
+let sequelize;
 
-const models = {
-  Company: sequelize.import('./Company'),
-  Owner: sequelize.import('./Owner'),
-};
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config,
+  );
+}
 
-Object.keys(models).forEach((modelName) => {
-  if ('associate' in models[modelName]) {
-    models[modelName].associate(models);
+fs.readdirSync(__dirname)
+  .filter((file) => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
+  .forEach((file) => {
+    const model = sequelize.import(path.join(__dirname, file));
+
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
   }
 });
 
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-export default models;
+db.Sequelize = Sequelize;
+
+module.exports = db;
