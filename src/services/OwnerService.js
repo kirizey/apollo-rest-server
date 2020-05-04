@@ -2,6 +2,7 @@ import models from '../models';
 
 const OwnerService = {
   getAll() {
+    console.log('kek')
     return models.Owner.findAll();
   },
 

@@ -61,6 +61,13 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
       },
+      businessModelId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'BusinessModels',
+          key: 'id'
+        }
+      },
       revenueId: {
         type: Sequelize.INTEGER,
         references: {
