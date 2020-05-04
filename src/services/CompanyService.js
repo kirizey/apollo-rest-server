@@ -5,7 +5,7 @@ const CompanyService = {
     return models.Company.findAll();
   },
 
-  getCompanyById(id) {
+  getById(id) {
     return models.Company.findOne({ where: { id } });
   },
 
