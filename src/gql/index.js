@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import cors from 'cors';
 import express from 'express';
 
-import models, { sequelize } from '../models';
+import { sequelize } from '../models';
 import company from './company';
 import owner from './owner';
 
@@ -18,7 +18,7 @@ const server = new ApolloServer({
   typeDefs: [typeDefs, company.typeDefs, owner.typeDefs],
   resolvers: [company.resolvers, owner.resolvers],
   context: {
-    models,
+    // models,
   },
   tracing: true,
 });
