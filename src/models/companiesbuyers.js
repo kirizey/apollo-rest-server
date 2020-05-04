@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   CompaniesBuyers.associate = function (models) {
     CompaniesBuyers.belongsTo(models.Company, { foreignKey: 'companyId' });
-    CompaniesBuyers.belongsTo(models.Buyers, { foreignKey: 'buyerId' });
+    CompaniesBuyers.belongsTo(models.Buyer, { foreignKey: 'buyerId' });
   };
   return CompaniesBuyers;
 };
