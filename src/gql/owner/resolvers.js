@@ -1,16 +1,17 @@
+import { CompanyService, OwnerService } from '../../services';
 
 const resolvers = {
   Query: {
-    owners: (_, __, { models }) => models.Person.findAll(),
-    owner: (_, { id }, { models }) => models.Person.findOne({ where: { id } }),
+    owners: () => OwnerService.getAll(),
+    owner: (_, { id }) => OwnerService.getById(id),
   },
 
   Mutation: {
-    createOwner: (_, { name }, { models }) => models.Person.create({ name }),
+    createOwner: (_, { name }) => OwnerService.create({ name }),
   },
 
   Owner: {
-    companies: (parent, __, { models }) => models.Company.findAll({ where: { ownerId: parent.id } }),
+    companies: (parent) => CompanyService.getWhere({ ownerId: parent.id }),
   },
 };
 

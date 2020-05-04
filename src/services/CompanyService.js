@@ -35,6 +35,10 @@ const CompanyService = {
 
     return null;
   },
+
+  getWhere(params) {
+    return models.Company.findAll({ where: params });
+  },
 };
 
 export default CompanyService;

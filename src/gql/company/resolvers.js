@@ -27,7 +27,7 @@ export default {
       const { ownerId } = parent;
 
       if (ownerId) {
-        return OwnerService.getById(parent.ownerId);
+        return OwnerService.getWhere({ id: parent.ownerId });
       }
 
       return null;

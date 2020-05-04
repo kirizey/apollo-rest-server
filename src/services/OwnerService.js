@@ -35,6 +35,10 @@ const OwnerService = {
 
     return null;
   },
-}
+
+  getWhere(params) {
+    return models.Owner.findAll({ where: params });
+  },
+};
 
 export default OwnerService;
