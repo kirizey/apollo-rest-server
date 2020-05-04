@@ -61,13 +61,6 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
       },
-      companyTypeId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'CompanyTypes',
-          key: 'id'
-        }
-      },
       revenueId: {
         type: Sequelize.INTEGER,
         references: {
@@ -86,13 +79,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'CompanyStatuses',
-          key: 'id'
-        }
-      },
-      businessModelId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'BusinessModels',
           key: 'id'
         }
       },

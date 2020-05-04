@@ -16,14 +16,14 @@ module.exports = {
           key: 'id'
         }
        },
-       buyerId: {
+      buyerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {         
           model: 'Buyers',
           key: 'id'
         }
-       },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

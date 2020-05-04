@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       companyId: {
-        type: Sequelize.INTEGER
-      },
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {        
+          model: 'Companies',
+          key: 'id'
+        }
+       },
       businessModelId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {         
+          model: 'BusinessModels',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
