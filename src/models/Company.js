@@ -48,10 +48,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'status',
     });
 
-    Company.hasOne(models.BusinessModel, {
-      foreignKey: 'businessModelId',
-      as: 'businessModel',
-    });
 
     Company.hasMany(models.Person, {
       as: 'contacts',
@@ -61,11 +57,19 @@ module.exports = (sequelize, DataTypes) => {
       as: 'researches',
     });
 
-    Company.hasMany(models.Buyer, {
+    Company.belongsToMany(models.Buyer, {
+      through: 'CompaniesBuyers',
+      foreignKey: 'buyerId',
       as: 'buyers',
     });
 
     Company.belongsToMany(models.IndustryCategory, {
+      through: 'CompaniesBusinessModels',
+      foreignKey: 'businessModelId',
+      as: 'businessModel',
+    });
+
+    Company.belongsToMany(models.BusinessModel, {
       through: 'CompaniesIndustryCategories',
       foreignKey: 'industryCategoryId',
       as: 'industryCategories',

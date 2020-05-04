@@ -1,18 +1,18 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Buyers', {
+    return queryInterface.createTable('CompaniesBusinessModels', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      active: {
-        type: Sequelize.BOOLEAN
+      companyId: {
+        type: Sequelize.INTEGER
       },
-      description: {
-        type: Sequelize.STRING
+      businessModelId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -21,17 +21,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      personId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Persons',
-          key: 'id'
-        }
-      },
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Buyers');
+    return queryInterface.dropTable('CompaniesBusinessModels');
   }
 };

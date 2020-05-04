@@ -4,16 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     active: DataTypes.BOOLEAN,
     description: DataTypes.STRING,
     personId: DataTypes.INTEGER,
-    companyId: DataTypes.INTEGER,
   }, {});
   Buyer.associate = function (models) {
     Buyer.hasOne(models.Person, {
       foreignKey: 'personId',
     });
 
-    Buyer.belongsTo(models.Company, {
+    Buyer.belongsToMany(models.IndustryCategory, {
+      through: 'CompaniesBuyers',
       foreignKey: 'companyId',
-      as: 'company',
+      as: 'companies',
     });
   };
   return Buyer;

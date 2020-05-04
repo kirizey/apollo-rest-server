@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
   }, {});
   BusinessModel.associate = function (models) {
-    // associations can be defined here
+    BusinessModel.belongsToMany(models.Company, {
+      through: 'CompaniesBusinessModels',
+      foreignKey: 'companyId',
+      as: 'companies',
+    });
   };
   return BusinessModel;
 };
