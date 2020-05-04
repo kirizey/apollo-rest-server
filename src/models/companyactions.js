@@ -4,10 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.DATE,
     description: DataTypes.STRING,
+    companyId: DataTypes.INTEGER,
   }, {});
   CompanyActions.associate = function (models) {
     CompanyActions.belongsTo(models.Company, {
-      foreignKey: 'actions_ids',
+      foreignKey: 'companyId',
+      as: 'company',
     });
   };
   return CompanyActions;

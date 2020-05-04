@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Buyer = sequelize.define('Buyer', {
     active: DataTypes.BOOLEAN,
     description: DataTypes.STRING,
+    personId: DataTypes.INTEGER,
+    companyId: DataTypes.INTEGER,
   }, {});
   Buyer.associate = function (models) {
     Buyer.hasOne(models.Person, {
@@ -10,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Buyer.belongsTo(models.Company, {
-      foreignKey: 'buyers_ids',
+      foreignKey: 'companyId',
+      as: 'company',
     });
   };
   return Buyer;

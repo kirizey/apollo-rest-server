@@ -1,12 +1,12 @@
 
 const resolvers = {
   Query: {
-    owners: (_, __, { models }) => models.Owner.findAll(),
-    owner: (_, { id }, { models }) => models.Owner.findOne({ where: { id } }),
+    owners: (_, __, { models }) => models.Person.findAll(),
+    owner: (_, { id }, { models }) => models.Person.findOne({ where: { id } }),
   },
 
   Mutation: {
-    createOwner: (_, { name }, { models }) => models.Owner.create({ name }),
+    createOwner: (_, { name }, { models }) => models.Person.create({ name }),
   },
 
   Owner: {

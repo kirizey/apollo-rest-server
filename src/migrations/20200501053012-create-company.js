@@ -58,36 +58,44 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      contactsIds: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-      },
       ownerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       companyTypeId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'CompanyTypes',
+          key: 'id'
+        }
       },
       revenueId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Revenues',
+          key: 'id'
+        }
       },
       parentId: {
-        type: Sequelize.INTEGER
-      },
-      researchIds: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Companies',
+          key: 'id'
+        }
       },
       companyStatusId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'CompanyStatuses',
+          key: 'id'
+        }
       },
       businessModelId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'BusinessModels',
+          key: 'id'
+        }
       },
-      industryCategoriesIds: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-      },
-      buyers_ids: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-      }
     });
   },
   down: (queryInterface, Sequelize) => {

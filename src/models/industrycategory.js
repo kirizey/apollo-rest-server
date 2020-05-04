@@ -5,8 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
   }, {});
   IndustryCategory.associate = function (models) {
-    IndustryCategory.belongsTo(models.Company, {
-      foreignKey: 'industry_categories_ids',
+    IndustryCategory.belongsToMany(models.Company, {
+      through: 'CompaniesIndustryCategories',
+      foreignKey: 'companyId',
+      as: 'companies',
     });
   };
   return IndustryCategory;

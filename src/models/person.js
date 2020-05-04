@@ -6,13 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     surname: DataTypes.STRING,
     phone: DataTypes.STRING,
+    companyId: DataTypes.INTEGER,
   }, {});
   Person.associate = function (models) {
-    /**
-     * Company has many contacts.
-     */
     Person.belongsTo(models.Company, {
-      foreignKey: 'contacts_ids',
+      foreignKey: 'companyId',
+      as: 'company',
     });
   };
   return Person;

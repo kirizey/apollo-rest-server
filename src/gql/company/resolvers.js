@@ -10,7 +10,7 @@ export default {
     createCompany: (_, fields, { models }) => models.Company.create(fields.input),
     updateCompany: async (_, fields, { models }) => {
       const { id, ...data } = fields.input;
-      if (!id) throw new UserInputError('You should provide company id');
+      if (!id) return new UserInputError('You should provide company id');
 
       try {
         const result = await models.Company.update(data, {
@@ -23,12 +23,22 @@ export default {
           return result[1].dataValues;
         }
       } catch (error) {
-        throw new UserInputError(error.message);
+        return new UserInputError(error.message);
       }
+
+      return null;
     },
   },
 
   Company: {
-    owner: (parent, __, { models }) => models.Owner.findOne({ where: { id: parent.ownerId } }),
+    owner: (parent, __, { models }) => {
+      const { ownerId } = parent;
+
+      if (ownerId) {
+        return models.Owner.findOne({ where: { id: parent.ownerId } });
+      }
+
+      return null;
+    },
   },
 };
